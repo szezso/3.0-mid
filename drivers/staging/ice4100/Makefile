@@ -1,0 +1,12 @@
+#obj-$(CONFIG_CE_OSAL)	+= osal/
+#obj-$(CONFIG_CE_PLATFORM_CONFIG)	+= platform_config/
+#obj-$(CONFIG_CE_PAL)	+= pal/
+#obj-$(CONFIG_CE_SYSTEM_UTILS)	+= system_utils/
+#obj-$(CONFIG_CE_IDL)	+= idl/
+#obj-$(CONFIG_CE_SVEN)	+= sven/
+#obj-$(CONFIG_CE_CLOCK_CONTROL)	+= clock_control/
+#obj-$(CONFIG_CE_POWER)	+= power/
+#obj-$(CONFIG_CE_GDL)	+= gdl/
+obj-$(CONFIG_CE_SGX_GFX)	+= sgx535/
+#obj-$(CONFIG_CE_MM)	+= mm/
+#obj-$(CONFIG_CE_SMD)  += SMD/

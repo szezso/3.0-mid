@@ -1,0 +1,37 @@
+This document describes the native firmware update process for
+updating various system firmware components on Intel Medfield based
+embedded platforms.
+
+Firmware update is initiated by usre space via sysfs interface. All
+subsequent communications with system controller Inter-Processor
+Communication (IPC) driver are based on standard firmware class
+loading mechanism.
+
+As of today, two images are required to perform the update:
+   1) DnX modules, which is a executable module for the system
+   controller unit (SCU)
+   2) Integrated Firmware Image (IFW)
+
+The future process may not require DnX module but such feature require
+newer firmware.
+
+Assumptions:
+	Intel SCU IPC driver loaded (CONFIG_INTEL_SCU_IPC)
+
+Usage:
+	1) load dnx image
+
+	echo dnx > /sys/bus/pci/devices/0000\:00\:01.7/image_type
+	echo 1 > /sys/class/firmware/0000\:00\:01.7/loading
+	cat dnx.bin > /sys/class/firmware/0000\:00\:01.7/data
+	echo 0 > /sys/class/firmware/0000\:00\:01.7/loading
+
+	2) load ifwi image, then system resets
+	echo ifwi > /sys/bus/pci/devices/0000\:00\:01.7/image_type
+	echo 1 > /sys/class/firmware/0000\:00\:01.7/loading
+	cat ifwi.bin > /sys/class/firmware/0000\:00\:01.7/data
+	echo 0 > /sys/class/firmware/0000\:00\:01.7/loading
+
+Note:
+	This can be automated based on uevent emitted by SCU IPC
+	driver at probing time.

@@ -1,0 +1,32 @@
+menu "SOC register dump support"
+
+config SOC_DUMP
+       tristate "SOC register dump support"
+	depends on X86_INTEL_MID
+
+config PMIC_POWER_DUMP
+       tristate "Dump PMIC power registers"
+       depends on SOC_DUMP
+
+config PMIC_GPIO_DUMP
+       tristate "Dump PMIC GPIO registers"
+       depends on SOC_DUMP
+
+config PMIC_LED_LCD_DUMP
+       tristate "Dump PMIC LED/LCD registers"
+       depends on SOC_DUMP
+
+config PMIC_RTC_DUMP
+       tristate "Dump PMIC RTC registers"
+       depends on SOC_DUMP
+
+config PMIC_BATT_DUMP
+       tristate "Dump PMIC battery registers"
+       depends on SOC_DUMP
+
+config MSIC_DUMP
+       tristate "Dump MSIC registers"
+       depends on SOC_DUMP
+       depends on MFD_INTEL_MSIC
+
+endmenu

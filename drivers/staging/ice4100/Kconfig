@@ -1,0 +1,44 @@
+#
+# Intel CE device configuration
+#
+# This driver provides support for the
+# Intel CE media processors
+#
+menu "Intel CE Media Processor"
+
+config X86_INTEL_CE
+	bool "Intel CE Media Processor Drivers"
+	default N
+	help
+	  Enable support for the Intel CE Media Processor functions
+
+choice
+	prompt "Build Intel CE kernel services as "
+	depends on X86_INTEL_CE
+	default CE_RELEASE
+
+config CE_RELEASE
+	bool "Release"
+	depends on X86_INTEL_CE
+	help
+	  Build Intel CE kernel services as release
+
+config CE_DEBUG
+	bool "Debug"
+	depends on X86_INTEL_CE
+	help
+	 Build Intel CE kernel services as debug
+
+endchoice
+
+if X86_INTEL_CE
+
+config CE_SGX_GFX
+	tristate "SGX Power VR graphics core driver"
+	help
+	  Driver for 2D and 3D accelerated graphics core
+
+endif
+
+endmenu
+

@@ -1,0 +1,24 @@
+menuconfig MFLD_SENSORS
+	bool "Intel Medfield Sensor Device Drivers"
+	default y
+	---help---
+	  Say Y here to get to see options for device drivers for various
+	  sensor devices on Medfiled.
+	  This option alone does not add any kernel code.
+
+	  If you say N, all options in this submenu will be skipped and disabled.
+
+if MFLD_SENSORS
+config SENSORS_AK8974COMPASS
+	tristate "Ak8974/AMI304 Compass Module"
+	depends on I2C
+	help
+	  To get Compass Sensor output from AK8974/AMI304 sensor.
+
+config SENSORS_APDS9802PSPROXIMITY
+        tristate "Medfield Avago APDS9802 Proximity Sensor Module"
+        depends on I2C
+        help
+          To get Proximity Sensor output from APDS9802
+          Proximity sensor.
+endif #MFLD_SENSORS

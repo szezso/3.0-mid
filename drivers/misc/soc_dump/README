@@ -1,0 +1,33 @@
+
+This directory contains a set of modules that provide an interface for
+a user space application to retrieve the contents of a selected set of
+hardware/firmware registers.
+
+The kernel portion of the register dumping utility is spilt into
+multiple modules.
+
+Each chip/set of registers will have a separate module that will
+be responsible for reading the registers and reporting thier contents to
+the main module that makes the information available to user via
+debugfs file /sys/kernel/debug/dump_registers.
+
+The register information is returned as a binary blob containing an
+array of reg_info structs (see register_info.h)
+
+socdump.c provides an API for the register dump modules to
+register themselves as a source of register information.
+(see socdump.h)
+
+Each register source module is responsible fo ensuring that the
+chip/registers it plans to report are present on the platform before
+registering itself as an information source.
+
+When the debugfs file is opened by the user space application the
+current register information is collected from all the registered
+sources. The user app can then read the register information.
+
+The simplest output utility is od using the command:
+    od -t x4 /sys/kernel/debug/dump_registers
+
+The last dword on the ouput line is the hexidecimal representation of
+the register contents.

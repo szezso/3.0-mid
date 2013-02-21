@@ -1,0 +1,32 @@
+The ektf2136 provides a native interface which hands back squares of
+interest when contacts are detected.
+
+It provides an I/O stream in the format
+
+0xFF 0xFE		-	header
+counter.w		-	frame timer
+row.w			-	rows in report
+size.w			-	total size of report (except header)
+
+each row is reported as
+
+col.b			-	top left of area (0 based)
+row.b
+length.b		-	number of data points
+data.b[]		-	array of sensor pressure data
+
+and the following ioctls
+
+SRIOCWM
+		arg = 1 enable sr native mode
+		arg = 0 return to normal mode
+SRIOCRM
+		returns 1 for sr mode, 0 for input
+SRIOCRCC
+		returns the columns reported by the panel
+SRIOCRCR
+		returns the rows reported by the panel
+SRIOCRV
+		returns the panel vendor
+SRIOCRP
+		returns the panel product id
